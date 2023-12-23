@@ -2,35 +2,36 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include <cstring>
+
 
 int main(){
-    std::vector<std::string> keys;
+    std::vector<std::string> fileLines;
     std::string lines;
     std::string firstDigit = "";
     std::string lastDigit = "";
     std::string strNumber = "";
     int num = 0;
     int total = 0;
-    std::ifstream fileIn;
+    std::ifstream m_file;
 
-    fileIn.open("keys.txt");
+    m_file.open("keys.txt");
 
-    while (fileIn >> lines){
-        keys.push_back(lines);
+    while (m_file >> lines){
+        fileLines.push_back(lines);
     }
-    fileIn.close();
+
+    m_file.close();
     
-    for(int i = 0; i < keys.size(); i++) {
-        for(int j = keys[i].length() - 1; j >= 0; j--){
+    for(int i = 0; i < fileLines.size(); i++) {
+        for(int j = fileLines[i].length() - 1; j >= 0; j--){
             strNumber = "";
-            if (isdigit(keys[i][j])) {
-                firstDigit = keys[i][j];
+            if (isdigit(fileLines[i][j])) {
+                firstDigit = fileLines[i][j];
             }
         }
-        for(int k = 0; k < keys[i].length(); k++){
-                if (isdigit(keys[i][k])) {
-                    lastDigit = keys[i][k];
+        for(int k = 0; k < fileLines[i].length(); k++){
+                if (isdigit(fileLines[i][k])) {
+                    lastDigit = fileLines[i][k];
                 }
             }
             strNumber = firstDigit + lastDigit;
@@ -39,6 +40,7 @@ int main(){
 
         std::cout << "Line " << i + 1 << ": " << strNumber << std::endl;
     }
+
     std::cout << "Total: " << total << std::endl;
     return 0;
 }
